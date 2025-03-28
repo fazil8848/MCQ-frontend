@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import { getUser, getToken } from "../utils/localStorage";
-import { getProfile } from "../services/authService";
 
 export const AuthContext = createContext();
 
@@ -16,14 +15,6 @@ export const AuthProvider = ({ children }) => {
 
       if (token && storedUser) {
         setUser(storedUser);
-        try {
-          const profile = await getProfile();
-          setUser(profile);
-        } catch (error) {
-          console.error("Failed to validate token:", err);
-          setUser(null);
-          setError("Session expired. Please login again.");
-        }
       }
       setLoading(false);
     };

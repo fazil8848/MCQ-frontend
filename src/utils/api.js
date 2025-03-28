@@ -5,8 +5,10 @@ import { clearAuthData, getToken } from "./localStorage";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const url = import.meta.env.VITE_API_URL;
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  baseURL: url,
   headers: {
     "Content-Type": "application/json",
   },
@@ -45,12 +47,6 @@ export const useAxiosInterceptor = () => {
               clearAuthData();
               setTimeout(() => navigate("/login"), 2000);
             }
-          } else if (status === 403) {
-            toast.error("You are not authorized to access this resource.");
-          } else if (status >= 500) {
-            toast.error("Server error. Please try again later.");
-          } else {
-            toast.error(data?.message || "Something went wrong.");
           }
         } else {
           toast.error("Network error. Please check your connection.");
