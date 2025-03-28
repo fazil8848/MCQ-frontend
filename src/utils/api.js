@@ -47,12 +47,21 @@ export const useAxiosInterceptor = () => {
               clearAuthData();
               setTimeout(() => navigate("/login"), 2000);
             }
+            return;
+          } else if (status === 403) {
+            toast.error("You are not authorized to access this resource.");
+            return;
+          } else if (status >= 500) {
+            toast.error("Server error. Please try again later.");
+            return;
+          } else {
+            toast.error(data?.message || "Something went wrong.");
+            return;
           }
         } else {
           toast.error("Network error. Please check your connection.");
+          return;
         }
-
-        return Promise.reject(error);
       }
     );
 
