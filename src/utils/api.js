@@ -5,7 +5,7 @@ import { clearAuthData, getToken } from "./localStorage";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const url = "https://mcq-backend-nine.vercel.app/api";
+const url = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
   baseURL: url,
