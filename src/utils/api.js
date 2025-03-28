@@ -5,12 +5,14 @@ import { clearAuthData, getToken } from "./localStorage";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const url = import.meta.env.VITE_API_URL;
+const url="https://whimsical-florentine-d89544.netlify.app";
 
 const api = axios.create({
-  baseURL: url,
+  baseURL: `${url}/api`, // Add /api prefix
+  withCredentials: true, // Ensure credentials are sent
   headers: {
     "Content-Type": "application/json",
+    Accept: "application/json",
   },
 });
 
